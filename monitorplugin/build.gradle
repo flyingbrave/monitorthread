@@ -1,0 +1,23 @@
+apply plugin: 'groovy'
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'org.ow2.asm:asm:7.0'
+    // 不能太高，以免和用户as或项目冲突
+    implementation 'com.android.tools.build:gradle:3.4.0'
+}
+//java {
+//    sourceCompatibility = JavaVersion.VERSION_1_7
+//    targetCompatibility = JavaVersion.VERSION_1_7
+//}
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.runingWoniu'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        //JitPack插件
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    }
+}
