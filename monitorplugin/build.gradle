@@ -3,7 +3,6 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
     implementation 'org.ow2.asm:asm:7.0'
-    // 不能太高，以免和用户as或项目冲突
     implementation 'com.android.tools.build:gradle:3.4.0'
 }
 //java {
