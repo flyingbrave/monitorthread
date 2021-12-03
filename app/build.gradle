@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.yxy.monitorthread'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -34,5 +34,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    api project(':monitormodel')
+//    api project(':monitormodel')
+    implementation 'com.github.runingWoniu.monitorthread:monitormodel:1.0.1'
+
+
 }
