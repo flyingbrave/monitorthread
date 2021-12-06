@@ -3,6 +3,8 @@ package com.yxy.monitorthread;
 import static com.yxy.monitorthread.ClassConstant.S_ProxyThread;
 import static com.yxy.monitorthread.ClassConstant.S_Thread;
 
+import com.android.ddmlib.Log;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -15,6 +17,8 @@ public class MonitorThreadClassVisitor extends ClassVisitor implements Opcodes{
     public MonitorThreadClassVisitor(ClassVisitor cv, String jarName) {
         super(Opcodes.ASM5, cv);
         this.jarName = jarName;
+        Log.i("tag5","MonitorThreadClassVisitor");
+        System.out.println("MonitorThreadClassVisitor");
     }
 
     @Override
@@ -23,7 +27,8 @@ public class MonitorThreadClassVisitor extends ClassVisitor implements Opcodes{
         changingSuper = false;
         buildingPackage = false;
         className = name;
-
+        Log.i("tag5","MonitorThreadClassVisitor visit ");
+        System.out.println("MonitorThreadClassVisitor  visit");
         if (filterClass(className)) {
             super.visit(version, access, name, signature, superName, interfaces);
             return;
@@ -32,6 +37,8 @@ public class MonitorThreadClassVisitor extends ClassVisitor implements Opcodes{
             switch (superName) {
                 case S_Thread:
                     changingSuper = true;
+                    Log.i("tag5","MonitorThreadClassVisitor visit 222");
+                    System.out.println("MonitorThreadClassVisitor  visit 222");
                     super.visit(version, access, name, signature, S_ProxyThread, interfaces);
                     return;
 
