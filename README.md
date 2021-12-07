@@ -6,9 +6,9 @@
 具体使用
 apply plugin: 'com.yxy.monitorthread'
 
-classpath 'com.github.runingWoniu.monitorthread:monitorplugin:1.0.5'
+classpath 'com.github.flyingbrave.monitorthread:monitorplugin:1.0.6'
 
-implementation 'com.github.runingWoniu.monitorthread:monitormodel:1.0.5'
+implementation 'com.github.flyingbrave.monitorthread:monitormodel:1.0.6'
 
 
 
