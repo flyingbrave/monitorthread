@@ -45,6 +45,8 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
     @Override
     void apply(Project project) {
         System.out.println("test MonitorThreadTransform log2")
+        def android = project.extensions.getByType(AppExtension)
+        android.registerTransform(this)
     }
 
     @Override
