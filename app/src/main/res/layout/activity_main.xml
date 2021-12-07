@@ -7,12 +7,25 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:background="#0000ff"
+        android:id="@+id/sss"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="new Thread"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:background="#ff0000"
+        android:id="@+id/sss2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="查看proxy"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sss" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
