@@ -44,7 +44,7 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        System.out.println("test MonitorThreadTransform log")
+        System.out.println("test MonitorThreadTransform log2")
     }
 
     @Override
