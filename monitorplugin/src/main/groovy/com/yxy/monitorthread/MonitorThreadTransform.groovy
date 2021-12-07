@@ -52,6 +52,7 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
+        def startTime = System.currentTimeMillis()
         Collection<TransformInput> inputs = transformInvocation.inputs
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
         if (outputProvider != null)
