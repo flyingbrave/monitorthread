@@ -62,7 +62,7 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
 
             input.directoryInputs.each { DirectoryInput directoryInput ->
                 System.out.println("handleDirectoryInput")
-//                handleDirectoryInput(directoryInput, outputProvider)
+                handleDirectoryInput(directoryInput, outputProvider)
             }
 
             input.jarInputs.each { JarInput jarInput ->
@@ -73,32 +73,32 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
             System.out.println("ThreadTrackerTransform cost ： $cost s")
         }
     }
-//    static void handleDirectoryInput(DirectoryInput directoryInput, TransformOutputProvider outputProvider) {
-//        if (directoryInput.file.isDirectory()) {
-//            // 遍历目录所有文件（包含子文件）
-//            directoryInput.file.eachFileRecurse { File file ->
-//                def name = file.name
-//                if (checkClassFile(name, false)) {
-//                    // println '----------- class <' + name + '> -----------'
-//                    ClassReader classReader = new ClassReader(file.bytes)
-//                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
-//                    ClassVisitor cv = new MonitorThreadClassVisitor(classWriter, null)
-//                    classReader.accept(cv, EXPAND_FRAMES)
-//                    byte[] code = classWriter.toByteArray()
-//                    FileOutputStream fos = new FileOutputStream(
-//                            file.parentFile.absolutePath + File.separator + name)
-//                    fos.write(code)
-//                    fos.close()
-//                }
-//            }
-//        }
-//
-//        // 固定写法 把输出给下一个任务
-//        def dest = outputProvider.getContentLocation(directoryInput.name,
-//                directoryInput.contentTypes, directoryInput.scopes,
-//                Format.DIRECTORY)
-//        FileUtils.copyDirectory(directoryInput.file, dest)
-//    }
+    static void handleDirectoryInput(DirectoryInput directoryInput, TransformOutputProvider outputProvider) {
+        if (directoryInput.file.isDirectory()) {
+            // 遍历目录所有文件（包含子文件）
+            directoryInput.file.eachFileRecurse { File file ->
+                def name = file.name
+                if (checkClassFile(name, false)) {
+                    // println '----------- class <' + name + '> -----------'
+                    ClassReader classReader = new ClassReader(file.bytes)
+                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
+                    ClassVisitor cv = new MonitorThreadClassVisitor(classWriter, null)
+                    classReader.accept(cv, EXPAND_FRAMES)
+                    byte[] code = classWriter.toByteArray()
+                    FileOutputStream fos = new FileOutputStream(
+                            file.parentFile.absolutePath + File.separator + name)
+                    fos.write(code)
+                    fos.close()
+                }
+            }
+        }
+
+        // 固定写法 把输出给下一个任务
+        def dest = outputProvider.getContentLocation(directoryInput.name,
+                directoryInput.contentTypes, directoryInput.scopes,
+                Format.DIRECTORY)
+        FileUtils.copyDirectory(directoryInput.file, dest)
+    }
 
 //    static void handleJarInputs(JarInput jarInput, TransformOutputProvider outputProvider) {
 //        if (jarInput.file.getAbsolutePath().endsWith(".jar")) {
@@ -149,16 +149,16 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
     /**
      * 过滤class文件名
      */
-//    static boolean checkClassFile(String name, boolean isJar) {
-//        if (isJar) {
-//            int lastIndex = name.lastIndexOf('/')
-//            if (lastIndex != -1) {
-//                name = name.substring(lastIndex + 1, name.length())
-//            }
-//            // 只要/后面的文件名，以便后续调用startsWith判断
-//        }
-//        return (name.endsWith(".class") && !name.startsWith("R\$")
-//                && name != "R.class" && !name.startsWith("BR\$")
-//                && name != "BR.class" && name != "BuildConfig.class")
-//    }
+    static boolean checkClassFile(String name, boolean isJar) {
+        if (isJar) {
+            int lastIndex = name.lastIndexOf('/')
+            if (lastIndex != -1) {
+                name = name.substring(lastIndex + 1, name.length())
+            }
+            // 只要/后面的文件名，以便后续调用startsWith判断
+        }
+        return (name.endsWith(".class") && !name.startsWith("R\$")
+                && name != "R.class" && !name.startsWith("BR\$")
+                && name != "BR.class" && name != "BuildConfig.class")
+    }
 }
