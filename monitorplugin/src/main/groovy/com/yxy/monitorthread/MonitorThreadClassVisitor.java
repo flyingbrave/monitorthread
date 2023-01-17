@@ -54,15 +54,15 @@ public class MonitorThreadClassVisitor extends ClassVisitor implements Opcodes{
             return mv;
         }
 
-//        if (changingSuper) { // 改继承
-//            mv = new ChangeSuperMethodVisitor(ASM5, mv, className);
-//        } else {
+        if (changingSuper) { // 改继承
+            mv = new ChangeSuperMethodVisitor(ASM5, mv, className);
+        } else {
 //            if (buildingPackage && name0.equals("buildPackageList")) {
 //                mv = new AddPackageMethodVisitor(ASM5, mv);
 //            } else {
 //                mv = new ChangeProxyMethodVisitor(ASM5, mv, className);
 //            }
-//        }
+        }
 
         return mv;
     }
