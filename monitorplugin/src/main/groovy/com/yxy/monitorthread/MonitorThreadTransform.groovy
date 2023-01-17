@@ -67,7 +67,7 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
 
             input.jarInputs.each { JarInput jarInput ->
                 System.out.println("handleJarInputs")
-//                handleJarInputs(jarInput, outputProvider)
+                handleJarInputs(jarInput, outputProvider)
             }
             def cost = (System.currentTimeMillis() - startTime) / 1000
             System.out.println("ThreadTrackerTransform cost ： $cost s")
@@ -100,50 +100,50 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
         FileUtils.copyDirectory(directoryInput.file, dest)
     }
 
-//    static void handleJarInputs(JarInput jarInput, TransformOutputProvider outputProvider) {
-//        if (jarInput.file.getAbsolutePath().endsWith(".jar")) {
-//            def jarName = jarInput.name
-//            // println '----------- jarName <' + jarName + '> -----------'
-//            def md5Name = DigestUtils.md5Hex(jarInput.file.getAbsolutePath())
-//            if (jarName.endsWith(".jar")) {
-//                jarName = jarName.substring(0, jarName.length() - 4)
-//            }
-//            JarFile jarFile = new JarFile(jarInput.file)
-//            Enumeration enumeration = jarFile.entries()
-//            File tmpFile = new File(jarInput.file.getParent() + File.separator + "classes_temp.jar")
-//            if (tmpFile.exists()) {
-//                tmpFile.delete()
-//            }
-//            JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(tmpFile))
-//
-//            while (enumeration.hasMoreElements()) {
-//                JarEntry jarEntry = (JarEntry) enumeration.nextElement()
-//                String entryName = jarEntry.getName()
-//                ZipEntry zipEntry = new ZipEntry(entryName)
-//                InputStream inputStream = jarFile.getInputStream(jarEntry)
-//                // println '----------- jarClass <' + entryName + '> -----------'
+    static void handleJarInputs(JarInput jarInput, TransformOutputProvider outputProvider) {
+        if (jarInput.file.getAbsolutePath().endsWith(".jar")) {
+            def jarName = jarInput.name
+            // println '----------- jarName <' + jarName + '> -----------'
+            def md5Name = DigestUtils.md5Hex(jarInput.file.getAbsolutePath())
+            if (jarName.endsWith(".jar")) {
+                jarName = jarName.substring(0, jarName.length() - 4)
+            }
+            JarFile jarFile = new JarFile(jarInput.file)
+            Enumeration enumeration = jarFile.entries()
+            File tmpFile = new File(jarInput.file.getParent() + File.separator + "classes_temp.jar")
+            if (tmpFile.exists()) {
+                tmpFile.delete()
+            }
+            JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(tmpFile))
+
+            while (enumeration.hasMoreElements()) {
+                JarEntry jarEntry = (JarEntry) enumeration.nextElement()
+                String entryName = jarEntry.getName()
+                ZipEntry zipEntry = new ZipEntry(entryName)
+                InputStream inputStream = jarFile.getInputStream(jarEntry)
+                // println '----------- jarClass <' + entryName + '> -----------'
 //                if (checkClassFile(entryName, true)) {
 //                    jarOutputStream.putNextEntry(zipEntry)
 //                    ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream))
 //                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
-//                    ClassVisitor cv = new MonitorThreadClassVisitor(classWriter, jarName)
+//                    ClassVisitor cv = new MonitorThreadClassVisitor2(classWriter, jarName)
 //                    classReader.accept(cv, EXPAND_FRAMES)
 //                    byte[] code = classWriter.toByteArray()
 //                    jarOutputStream.write(code)
 //                } else {
-//                    jarOutputStream.putNextEntry(zipEntry)
-//                    jarOutputStream.write(IOUtils.toByteArray(inputStream))
+                    jarOutputStream.putNextEntry(zipEntry)
+                    jarOutputStream.write(IOUtils.toByteArray(inputStream))
 //                }
-//                jarOutputStream.closeEntry()
-//            }
-//            jarOutputStream.close()
-//            jarFile.close()
-//            def dest = outputProvider.getContentLocation(jarName + md5Name,
-//                    jarInput.contentTypes, jarInput.scopes, Format.JAR)
-//            FileUtils.copyFile(tmpFile, dest)
-//            tmpFile.delete()
-//        }
-//    }
+                jarOutputStream.closeEntry()
+            }
+            jarOutputStream.close()
+            jarFile.close()
+            def dest = outputProvider.getContentLocation(jarName + md5Name,
+                    jarInput.contentTypes, jarInput.scopes, Format.JAR)
+            FileUtils.copyFile(tmpFile, dest)
+            tmpFile.delete()
+        }
+    }
 
 
     /**
