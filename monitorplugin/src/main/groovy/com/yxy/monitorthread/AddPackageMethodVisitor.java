@@ -14,7 +14,7 @@ public class AddPackageMethodVisitor extends MethodVisitor {
     public void visitInsn(int opcode) {
         if (opcode == Opcodes.ARETURN || opcode == Opcodes.RETURN) {
             for (String path : PluginUtils.getClassList()) {
-                mv.visitFieldInsn(Opcodes.GETSTATIC, "com/yxy/monitorthread/UserPackage", "packageList", "Ljava/util/ArrayList;");
+                mv.visitFieldInsn(Opcodes.GETSTATIC, "com/yxy/monitormodel/UserPackage", "packageList", "Ljava/util/ArrayList;");
                 mv.visitLdcInsn(path);
                 mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/util/ArrayList", "add", "(Ljava/lang/Object;)Z", false);
             }
