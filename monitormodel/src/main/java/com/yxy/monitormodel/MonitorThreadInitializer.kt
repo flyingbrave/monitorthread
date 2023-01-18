@@ -3,10 +3,11 @@ package com.yxy.monitormodel
 import android.content.Context
 import android.util.Log
 import androidx.startup.Initializer
+import com.yxy.monitormodel.proxy.AsyncTaskHook
 
 class MonitorThreadInitializer : Initializer<Any> {
     override fun create(p0: Context): Any {
-        Log.i("tag5","MonitorThreadInitializer init")
+        AsyncTaskHook.hook()
         Log.d(LOG_TAG, "ThreadTracker Initialize")
         UserPackage.buildPackageList()
         UserPackage.getPackageList().removeAt(0)

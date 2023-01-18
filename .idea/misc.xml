@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4904891304347826" />
         <entry key="monitormodel/src/main/res/layout/activity_main.xml" value="0.30625" />
+        <entry key="monitormodel/src/main/res/layout/threadtracker_activity_tracker.xml" value="0.15121580547112462" />
+        <entry key="monitormodel/src/main/res/layout/threadtracker_thread_item.xml" value="0.15121580547112462" />
       </map>
     </option>
   </component>

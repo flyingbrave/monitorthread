@@ -1,6 +1,6 @@
 package com.yxy.monitorthread;
 
-import static com.yxy.monitorthread.ClassConstant.S_ProxyThread;
+import static com.yxy.monitorthread.ClassConstant.S_TBaseThread;
 import static com.yxy.monitorthread.ClassConstant.S_Thread;
 
 import com.android.ddmlib.Log;
@@ -39,7 +39,7 @@ public class MonitorThreadClassVisitor extends ClassVisitor implements Opcodes{
                     changingSuper = true;
                     Log.i("tag5","MonitorThreadClassVisitor visit 222");
                     System.out.println("MonitorThreadClassVisitor  visit 222");
-                    super.visit(version, access, name, signature, S_ProxyThread, interfaces);
+                    super.visit(version, access, name, signature, S_TBaseThread, interfaces);
                     return;
 
             }

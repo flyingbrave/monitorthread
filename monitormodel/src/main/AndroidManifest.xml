@@ -14,19 +14,21 @@
                 android:value="androidx.startup" />
         </provider>
         <activity
-            android:launchMode="singleTask"
-            android:taskAffinity="com.yxy.monitorthread.task"
-            android:theme="@style/MonitorThreadAppTheme"
-            android:label="MonitorThread"
+            android:name="com.codoon.threadtracker.ui.TrackerActivity"
             android:icon="@mipmap/ic_launcher"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:name=".MainActivity">
-
+            android:roundIcon="@mipmap/ic_launcher"
+            android:label="ThreadTracker"
+            android:theme="@style/MonitorThreadAppTheme"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.codoon.threadtracker.task">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.codoon.threadtracker.ui.ThreadDetailsActivity"
+            android:taskAffinity="com.codoon.threadtracker.task" />
     </application>
 
 </manifest>

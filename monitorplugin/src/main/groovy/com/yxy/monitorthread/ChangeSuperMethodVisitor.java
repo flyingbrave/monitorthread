@@ -1,7 +1,7 @@
 package com.yxy.monitorthread;
 
 
-import static com.yxy.monitorthread.ClassConstant.S_ProxyThread;
+import static com.yxy.monitorthread.ClassConstant.S_TBaseThread;
 import static com.yxy.monitorthread.ClassConstant.S_Thread;
 
 import com.android.ddmlib.Log;
@@ -26,7 +26,7 @@ public class ChangeSuperMethodVisitor extends MethodVisitor {
                 case S_Thread:
                     Log.i("tag5","visitMethodInsn 改继承");
                     System.out.println("visitMethodInsn 改继承");
-                    mv.visitMethodInsn(opcode, S_ProxyThread, name, descriptor, false);
+                    mv.visitMethodInsn(opcode, S_TBaseThread, name, descriptor, false);
                     return;
             }
         }

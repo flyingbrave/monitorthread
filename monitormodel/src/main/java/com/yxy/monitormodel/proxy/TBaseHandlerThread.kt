@@ -1,36 +1,25 @@
 package com.yxy.monitormodel.proxy
 
+import android.os.HandlerThread
 import android.os.SystemClock
-import android.util.Log
-import com.yxy.monitormodel.LOG_TAG
 import com.yxy.monitormodel.ThreadInfoManager
 import com.yxy.monitormodel.TrackerUtils
 import com.yxy.monitormodel.bean.ThreadInfo
 
-open class ProxyThread : Thread{
-    internal constructor() : super()
-    internal constructor(runnable: Runnable?) : super(runnable)
-    internal constructor(group: ThreadGroup?, target: Runnable?) : super(group, target)
-    internal constructor(group: ThreadGroup?, name: String) : super(group, name)
-    internal constructor(target: Runnable?, name: String) : super(target, name)
-    internal constructor(group: ThreadGroup?, target: Runnable?, name: String) : super(
-        group,
-        target,
-        name
-    )
 
-    internal constructor(
-        group: ThreadGroup?,
-        target: Runnable?,
-        name: String,
-        stackSize: Long
-    ) : super(group, target, name, stackSize)
+/**
+ * 因HandlerThread继承自Thread，所以复制ProxyThread方法
+ */
+open class TBaseHandlerThread : HandlerThread {
+    constructor(name: String) : super(name)
+
+    constructor(name: String, priority: Int) : super(name, priority)
 
     @Synchronized
     override fun start() {
         val callStack = TrackerUtils.getStackString()
-        Log.d(LOG_TAG, "proxy callStack  $callStack")
         super.start()
+
         // 有则更新没有则新增
         val info = ThreadInfoManager.INSTANCE.getThreadInfoById(id)
         info?.also {
@@ -41,7 +30,6 @@ open class ProxyThread : Thread{
                 it.callStack = callStack
                 it.callThreadId = currentThread().id
             }
-            Log.d(LOG_TAG, "proxy callStack  id $id")
         } ?: apply {
             val newInfo = ThreadInfo()
             newInfo.id = id
@@ -51,9 +39,7 @@ open class ProxyThread : Thread{
             newInfo.state = state
             newInfo.startTime = SystemClock.elapsedRealtime()
             ThreadInfoManager.INSTANCE.putThreadInfo(id, newInfo)
-            Log.d(LOG_TAG, "proxy callStack  newInfo id $id")
         }
-        Log.d(LOG_TAG, "proxy callStack  end ")
     }
 
     override fun run() {

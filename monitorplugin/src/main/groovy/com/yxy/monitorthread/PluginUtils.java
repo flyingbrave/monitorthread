@@ -114,7 +114,7 @@ class PluginUtils {
     }
 
     static void log(String str) {
-        // System.out.println(str);
+         System.out.println(str);
     }
 
     // 记录注解生成的类，统计高亮用户代码时将其去除
