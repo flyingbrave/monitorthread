@@ -131,7 +131,7 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
                     print("tag5 3")
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
                     print("tag5 4")
-                    ClassVisitor cv = new MonitorThreadClassVisitor2(classWriter, jarName)
+                    ClassVisitor cv = new MonitorThreadClassVisitor(classWriter, jarName)
                     print("tag5 5")
                     classReader.accept(cv, EXPAND_FRAMES)
                     print("tag5 6")

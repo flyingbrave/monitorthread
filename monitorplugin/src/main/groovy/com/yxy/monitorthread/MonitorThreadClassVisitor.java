@@ -15,7 +15,7 @@ public class MonitorThreadClassVisitor extends ClassVisitor implements Opcodes{
     private boolean buildingPackage = false; // 是否处于建立用户可达代码包列表中
     private String jarName = null; // 不是jar包则为空
     public MonitorThreadClassVisitor(ClassVisitor cv, String jarName) {
-        super(Opcodes.ASM5, cv);
+        super(Opcodes.ASM6, cv);
         this.jarName = jarName;
         Log.i("tag5","MonitorThreadClassVisitor");
         System.out.println("MonitorThreadClassVisitor");
@@ -55,12 +55,12 @@ public class MonitorThreadClassVisitor extends ClassVisitor implements Opcodes{
         }
 
         if (changingSuper) { // 改继承
-            mv = new ChangeSuperMethodVisitor(ASM5, mv, className);
+            mv = new ChangeSuperMethodVisitor(ASM6, mv, className);
         } else {
             if (buildingPackage && name0.equals("buildPackageList")) {
-                mv = new AddPackageMethodVisitor(ASM5, mv);
+                mv = new AddPackageMethodVisitor(ASM6, mv);
             } else {
-                mv = new ChangeProxyMethodVisitor(ASM5, mv, className);
+                mv = new ChangeProxyMethodVisitor(ASM6, mv, className);
             }
         }
 
