@@ -4,6 +4,7 @@ import com.android.annotations.NonNull
 import com.android.build.api.transform.*
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.sun.tools.javac.util.Log
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
@@ -123,13 +124,21 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
                 InputStream inputStream = jarFile.getInputStream(jarEntry)
                 // println '----------- jarClass <' + entryName + '> -----------'
                 if (checkClassFile(entryName, true)) {
+                    print("tag5 1")
                     jarOutputStream.putNextEntry(zipEntry)
+                    print("tag5 2")
                     ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream))
+                    print("tag5 3")
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
+                    print("tag5 4")
                     ClassVisitor cv = new MonitorThreadClassVisitor2(classWriter, jarName)
+                    print("tag5 5")
                     classReader.accept(cv, EXPAND_FRAMES)
+                    print("tag5 6")
                     byte[] code = classWriter.toByteArray()
+                    print("tag5 7")
                     jarOutputStream.write(code)
+                    print("tag5 8")
                 } else {
                     jarOutputStream.putNextEntry(zipEntry)
                     jarOutputStream.write(IOUtils.toByteArray(inputStream))

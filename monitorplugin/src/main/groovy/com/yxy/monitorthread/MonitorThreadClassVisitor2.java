@@ -15,7 +15,7 @@ public class MonitorThreadClassVisitor2 extends ClassVisitor implements Opcodes{
     private boolean buildingPackage = false; // 是否处于建立用户可达代码包列表中
     private String jarName = null; // 不是jar包则为空
     public MonitorThreadClassVisitor2(ClassVisitor cv, String jarName) {
-        super(Opcodes.ASM5, cv);
+        super(Opcodes.ASM6, cv);
         this.jarName = jarName;
         Log.i("tag5","MonitorThreadClassVisitor22222");
     }
