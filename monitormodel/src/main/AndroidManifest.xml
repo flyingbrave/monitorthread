@@ -14,7 +14,7 @@
                 android:value="androidx.startup" />
         </provider>
         <activity
-            android:name="com.codoon.threadtracker.ui.TrackerActivity"
+            android:name="com.yxy.monitormodel.ui.TrackerActivity"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher"
             android:label="ThreadTracker"
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.codoon.threadtracker.ui.ThreadDetailsActivity"
+            android:name="com.yxy.monitormodel.ui.ThreadDetailsActivity"
             android:taskAffinity="com.codoon.threadtracker.task" />
     </application>
 
