@@ -1,10 +1,9 @@
 package com.yxy.monitorthread
 
-import com.android.annotations.NonNull
+
 import com.android.build.api.transform.*
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformManager
-import com.sun.tools.javac.util.Log
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
