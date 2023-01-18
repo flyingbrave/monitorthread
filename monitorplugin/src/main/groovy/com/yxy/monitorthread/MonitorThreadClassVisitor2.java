@@ -17,8 +17,7 @@ public class MonitorThreadClassVisitor2 extends ClassVisitor implements Opcodes{
     public MonitorThreadClassVisitor2(ClassVisitor cv, String jarName) {
         super(Opcodes.ASM5, cv);
         this.jarName = jarName;
-        Log.i("tag5","MonitorThreadClassVisitor");
-        System.out.println("MonitorThreadClassVisitor");
+        Log.i("tag5","MonitorThreadClassVisitor22222");
     }
 
     @Override
@@ -27,8 +26,7 @@ public class MonitorThreadClassVisitor2 extends ClassVisitor implements Opcodes{
         changingSuper = false;
         buildingPackage = false;
         className = name;
-        Log.i("tag5","MonitorThreadClassVisitor visit ");
-        System.out.println("MonitorThreadClassVisitor  visit");
+        Log.i("tag5","MonitorThreadClassVisitor visit22222 ");
         if (filterClass(className)) {
             super.visit(version, access, name, signature, superName, interfaces);
             return;
@@ -38,7 +36,7 @@ public class MonitorThreadClassVisitor2 extends ClassVisitor implements Opcodes{
                 case S_Thread:
                     changingSuper = true;
                     Log.i("tag5","MonitorThreadClassVisitor visit 222");
-                    System.out.println("MonitorThreadClassVisitor  visit 222");
+                    System.out.println("MonitorThreadClassVisitor  visit 222222");
                     super.visit(version, access, name, signature, S_ProxyThread, interfaces);
                     return;
 

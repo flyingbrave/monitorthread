@@ -122,18 +122,18 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
                 ZipEntry zipEntry = new ZipEntry(entryName)
                 InputStream inputStream = jarFile.getInputStream(jarEntry)
                 // println '----------- jarClass <' + entryName + '> -----------'
-//                if (checkClassFile(entryName, true)) {
-//                    jarOutputStream.putNextEntry(zipEntry)
-//                    ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream))
-//                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
-//                    ClassVisitor cv = new MonitorThreadClassVisitor2(classWriter, jarName)
-//                    classReader.accept(cv, EXPAND_FRAMES)
-//                    byte[] code = classWriter.toByteArray()
-//                    jarOutputStream.write(code)
-//                } else {
+                if (checkClassFile(entryName, true)) {
+                    jarOutputStream.putNextEntry(zipEntry)
+                    ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream))
+                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
+                    ClassVisitor cv = new MonitorThreadClassVisitor2(classWriter, jarName)
+                    classReader.accept(cv, EXPAND_FRAMES)
+                    byte[] code = classWriter.toByteArray()
+                    jarOutputStream.write(code)
+                } else {
                     jarOutputStream.putNextEntry(zipEntry)
                     jarOutputStream.write(IOUtils.toByteArray(inputStream))
-//                }
+                }
                 jarOutputStream.closeEntry()
             }
             jarOutputStream.close()
