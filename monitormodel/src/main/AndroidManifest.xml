@@ -17,10 +17,10 @@
             android:name="com.yxy.monitormodel.ui.TrackerActivity"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher"
-            android:label="ThreadTracker"
+            android:label="ThreadMonitor"
             android:theme="@style/MonitorThreadAppTheme"
             android:launchMode="singleTask"
-            android:taskAffinity="com.codoon.threadtracker.task">
+            android:taskAffinity="com.yxy.threadMonitor.task">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,7 +28,7 @@
         </activity>
         <activity
             android:name="com.yxy.monitormodel.ui.ThreadDetailsActivity"
-            android:taskAffinity="com.codoon.threadtracker.task" />
+            android:taskAffinity="com.yxy.threadMonitor.task" />
     </application>
 
 </manifest>

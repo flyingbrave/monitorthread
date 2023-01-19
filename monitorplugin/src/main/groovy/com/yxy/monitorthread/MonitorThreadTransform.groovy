@@ -84,16 +84,7 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
 
             input.jarInputs.each { JarInput jarInput ->
                 System.out.println("handleJarInputs")
-//                if (jarInput.file.getAbsolutePath().endsWith(".jar") && jarInput.name.startsWith("com.codoon.threadtracker:threadtracker")) {
-//                    int colonIndex = jarInput.name.lastIndexOf(":")
-//                    String version = jarInput.name.substring(colonIndex + 1)
-//                    if (version != VERSION) {
-//                        throw new RuntimeException("version mismatching: please use com.codoon.threadtracker:threadtracker:" + VERSION)
-//                    }
-//                    threadtrackerJarInput = jarInput
-//                } else {
-                    handleJarInputs(jarInput, outputProvider)
-//                }
+                handleJarInputs(jarInput, outputProvider)
             }
             def cost = (System.currentTimeMillis() - startTime) / 1000
             System.out.println("ThreadTrackerTransform cost ： $cost s")
