@@ -9,7 +9,7 @@
         android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#ff00bc71"
+        android:background="#8372FF"
         android:textColor="#ffffffff"
         android:gravity="center_vertical"
         android:paddingLeft="40dp"
@@ -40,7 +40,7 @@
                 android:textColor="#f222"
                 tools:text="Thread info"
                 android:gravity="center_vertical"
-                android:background="#2500bc71"
+                android:background="#258372FF"
                 android:paddingLeft="20dp" />
 
             <RelativeLayout
@@ -97,7 +97,7 @@
                 android:textColor="#f222"
                 tools:text="Call stack"
                 android:gravity="center_vertical"
-                android:background="#2500bc71"
+                android:background="#258372FF"
                 android:paddingLeft="20dp" />
 
             <RelativeLayout
@@ -109,15 +109,15 @@
                     android:id="@+id/stack1Tips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="13dp"
-                    android:textColor="#f444"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#ffeaf9ff"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:background="#ffeaf9ff"
+                    android:textColor="#f444"
+                    android:textSize="13dp"
                     tools:text="Call from thread 1432" />
 
                 <TextView
@@ -154,7 +154,7 @@
                 android:textColor="#f222"
                 android:text="Running Stack"
                 android:gravity="center_vertical"
-                android:background="#2500bc71"
+                android:background="#258372FF"
                 android:paddingLeft="20dp" />
 
             <TextView

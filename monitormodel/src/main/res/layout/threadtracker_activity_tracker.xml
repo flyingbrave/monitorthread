@@ -9,10 +9,10 @@
         android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#ff00bc71"
+        android:background="#8372FF"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="ThreadTracker"
+        android:text="MonitorThread"
         android:textColor="#ffffffff"
         android:textSize="16dp" />
 
