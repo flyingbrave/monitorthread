@@ -22,6 +22,9 @@ import static org.objectweb.asm.ClassReader.EXPAND_FRAMES
 
 class MonitorThreadTransform extends Transform implements Plugin<Project> {
 
+    private final String VERSION = "1.1.0"
+
+
     @Override
     String getName() {
         return "MonitorThreadTransform"
@@ -44,7 +47,13 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        System.out.println("test MonitorThreadTransform log2")
+        System.out.println("hello ThreadTrackerPlugin")
+        project.getRootProject().getSubprojects().each { subProject ->
+            PluginUtils.addProjectName(subProject.name)
+            PluginUtils.projectPathList.add(subProject.projectDir.toString())
+            // println "subProject path: $subProject.projectDir"
+        }
+
         def android = project.extensions.getByType(AppExtension)
         android.registerTransform(this)
     }
@@ -53,11 +62,19 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
         def startTime = System.currentTimeMillis()
+
+        // 记录注解生成的java文件
+        println 'deal apt file...'
+        PluginUtils.dealAptFile()
+
         Collection<TransformInput> inputs = transformInvocation.inputs
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
+
         if (outputProvider != null)
             outputProvider.deleteAll()
-        System.out.println("transform threads...")
+
+        println 'transform threads...'
+        JarInput threadtrackerJarInput = null
         inputs.each { TransformInput input ->
 
             input.directoryInputs.each { DirectoryInput directoryInput ->
@@ -67,7 +84,16 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
 
             input.jarInputs.each { JarInput jarInput ->
                 System.out.println("handleJarInputs")
-                handleJarInputs(jarInput, outputProvider)
+//                if (jarInput.file.getAbsolutePath().endsWith(".jar") && jarInput.name.startsWith("com.codoon.threadtracker:threadtracker")) {
+//                    int colonIndex = jarInput.name.lastIndexOf(":")
+//                    String version = jarInput.name.substring(colonIndex + 1)
+//                    if (version != VERSION) {
+//                        throw new RuntimeException("version mismatching: please use com.codoon.threadtracker:threadtracker:" + VERSION)
+//                    }
+//                    threadtrackerJarInput = jarInput
+//                } else {
+                    handleJarInputs(jarInput, outputProvider)
+//                }
             }
             def cost = (System.currentTimeMillis() - startTime) / 1000
             System.out.println("ThreadTrackerTransform cost ： $cost s")
@@ -123,21 +149,21 @@ class MonitorThreadTransform extends Transform implements Plugin<Project> {
                 InputStream inputStream = jarFile.getInputStream(jarEntry)
                 // println '----------- jarClass <' + entryName + '> -----------'
                 if (checkClassFile(entryName, true)) {
-                    print("tag5 1")
+
                     jarOutputStream.putNextEntry(zipEntry)
-                    print("tag5 2")
+
                     ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream))
-                    print("tag5 3")
+
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
-                    print("tag5 4")
+
                     ClassVisitor cv = new MonitorThreadClassVisitor(classWriter, jarName)
-                    print("tag5 5")
+
                     classReader.accept(cv, EXPAND_FRAMES)
-                    print("tag5 6")
+
                     byte[] code = classWriter.toByteArray()
-                    print("tag5 7")
+
                     jarOutputStream.write(code)
-                    print("tag5 8")
+
                 } else {
                     jarOutputStream.putNextEntry(zipEntry)
                     jarOutputStream.write(IOUtils.toByteArray(inputStream))

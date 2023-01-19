@@ -1,8 +1,17 @@
 package com.yxy.monitorthread;
 
 
+import static com.yxy.monitorthread.ClassConstant.S_HandlerThread;
+import static com.yxy.monitorthread.ClassConstant.S_ScheduledThreadPoolExecutor;
+import static com.yxy.monitorthread.ClassConstant.S_TBaseHandlerThread;
+import static com.yxy.monitorthread.ClassConstant.S_TBaseScheduledThreadPoolExecutor;
 import static com.yxy.monitorthread.ClassConstant.S_TBaseThread;
+import static com.yxy.monitorthread.ClassConstant.S_TBaseThreadPoolExecutor;
+import static com.yxy.monitorthread.ClassConstant.S_TBaseTimer;
 import static com.yxy.monitorthread.ClassConstant.S_Thread;
+import static com.yxy.monitorthread.ClassConstant.S_ThreadPoolExecutor;
+import static com.yxy.monitorthread.ClassConstant.S_Timer;
+import static com.yxy.monitorthread.PluginUtils.log;
 
 import com.android.ddmlib.Log;
 
@@ -24,9 +33,24 @@ public class ChangeSuperMethodVisitor extends MethodVisitor {
         if (name.equalsIgnoreCase("<init>")) {
             switch (owner) {
                 case S_Thread:
-                    Log.i("tag5","visitMethodInsn 改继承");
-                    System.out.println("visitMethodInsn 改继承");
+                    log("changingSuper Thread: " + className + " " + owner + " " + name);
                     mv.visitMethodInsn(opcode, S_TBaseThread, name, descriptor, false);
+                    return;
+                case S_ThreadPoolExecutor:
+                    log("changingSuper ThreadPoolExecutor: " + className + " " + owner + " " + name);
+                    mv.visitMethodInsn(opcode, S_TBaseThreadPoolExecutor, name, descriptor, false);
+                    return;
+                case S_ScheduledThreadPoolExecutor:
+                    log("changingSuper ScheduledThreadPoolExecutor: " + className + " " + owner + " " + name);
+                    mv.visitMethodInsn(opcode, S_TBaseScheduledThreadPoolExecutor, name, descriptor, false);
+                    return;
+                case S_Timer:
+                    log("changingSuper Timer: " + className + " " + owner + " " + name);
+                    mv.visitMethodInsn(opcode, S_TBaseTimer, name, descriptor, false);
+                    return;
+                case S_HandlerThread:
+                    log("changingSuper HandlerThread: " + className + " " + owner + " " + name);
+                    mv.visitMethodInsn(opcode, S_TBaseHandlerThread, name, descriptor, false);
                     return;
             }
         }
