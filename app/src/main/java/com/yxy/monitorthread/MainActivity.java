@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.yxy.monitormodel.ThreadInfoManager;
 import com.yxy.monitormodel.bean.ThreadInfo;
-import com.yxy.monitormodel.proxy.ProxyThread;
+//import com.yxy.monitormodel.proxy.ProxyThread;
 
 public class MainActivity extends AppCompatActivity {
     Thread thread;
@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.sss2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(thread instanceof ProxyThread){
-                    Log.i("tag5","thread instanceof ProxyThread  替换成功");
-                }
+//                if(thread instanceof ProxyThread){
+//                    Log.i("tag5","thread instanceof ProxyThread  替换成功");
+//                }
                 ThreadInfo threadInfo=ThreadInfoManager.getINSTANCE().getThreadInfoById(thread.getId());
                 if(threadInfo!=null){
                     Log.i("tag5","threadInfo "+threadInfo.getName());
