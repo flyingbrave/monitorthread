@@ -7,9 +7,9 @@
 apply plugin: 'com.yxy.monitorthread'
 
 # classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-classpath 'com.github.flyingbrave.monitorthread:monitorplugin:1.2.7'
+classpath 'com.github.flyingbrave.monitorthread:monitorplugin:1.2.8'
 
-implementation 'com.github.flyingbrave.monitorthread:monitormodel:1.2.7'
+implementation 'com.github.flyingbrave.monitorthread:monitormodel:1.2.8'
 
 
 
