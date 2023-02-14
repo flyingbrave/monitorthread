@@ -6,9 +6,10 @@
 具体使用
 apply plugin: 'com.yxy.monitorthread'
 
-classpath 'com.github.flyingbrave.monitorthread:monitorplugin:1.0.6'
+# classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+classpath 'com.github.flyingbrave.monitorthread:monitorplugin:1.2.7'
 
-implementation 'com.github.flyingbrave.monitorthread:monitormodel:1.0.6'
+implementation 'com.github.flyingbrave.monitorthread:monitormodel:1.2.7'
 
 
 
